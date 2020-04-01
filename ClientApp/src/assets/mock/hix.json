@@ -1,0 +1,276 @@
+{
+  "PrescriptionInfo": {
+    "payload": {
+      "originVo": {
+        "providerName": "Company Name",
+        "providerSoftwareVersion": "9.21.3.48601",
+        "providerSoftwareUser": "Company User"
+      },
+      "admissionInfo": {
+        "admissionDate": {
+          "dateContent": "1397-06-10",
+          "dateCalendarType": 0
+        },
+        "admissionType": 1,
+        "healthCenterInfo": {
+          "healthCenterId": null,
+          "organizationType": 4,
+          "attendingDoctorInfo": {
+            "medicalCouncilCode": {
+              "content": "168232",
+              "schemaAgency": "irimc.org"
+            },
+            "speciality": 151212
+          }
+        }
+      },
+      "insuranceInfo": {
+        "insuranceNumber": {
+          "content": "3620341745",
+          "schemaAgency": "2"
+        },
+        "insuranceBookletExpirationDate": {
+          "dateContent": "1404-11-01",
+          "dateCalendarType": 0
+        },
+        "insuranceBookletPageNumber": 18,
+        "insuranceOrganizationCode": 2,
+        "haveSupplementaryInsurance": false
+      },
+      "prescriptionCostInfo": {
+        "totalCost": {
+          "content": 246650,
+          "currencyCode": 0
+        },
+        "technicalCost": {
+          "content": 35000,
+          "currencyCode": 0
+        },
+        "discount": {
+          "content": 0,
+          "currencyCode": 0
+        },
+        "otherExpense": {
+          "titleOfMedicalExpenses": {
+            "content": "",
+            "languageCode": 0
+          },
+          "costOfMedicalExpenses": {
+            "content": 0,
+            "currencyCode": 0
+          }
+        },
+        "tax": {
+          "content": 0,
+          "currencyCode": 0
+        },
+        "payableByPatient": {
+          "content": 212000,
+          "currencyCode": 0
+        },
+        "automation": {
+          "content": 0,
+          "currencyCode": 0
+        },
+        "subsidy": {
+          "content": 0,
+          "currencyCode": 0
+        },
+        "internetConfirmation": {
+          "content": 0,
+          "currencyCode": 0
+        }
+      },
+      "medicationsInfo": [
+        {
+          "acceptedMedicationItemInfo": {
+            "genericCode": {
+              "content": "400  ",
+              "schemaAgency": "Generic Code"
+            },
+            "frequencyUsage": {
+              "content": "طبق دستور پزشک",
+              "languageCode": 0
+            },
+            "medicationCount": {
+              "content": 1,
+              "unitCode": 0
+            }
+          },
+          "checkedOutMedicationItemInfo": {
+            "nationalDrugCode": {
+              "content": "56645645",
+              "schemaAgency": "FDO.ir"
+            },
+            "frequencyUsage": {
+              "content": "طبق دستور پزشک",
+              "languageCode": 0
+            },
+            "deliveredMedicationCount": {
+              "content": 1,
+              "unitCode": 0
+            },
+            "medicationDeliverDate": {
+              "dateContent": "1397-06-10",
+              "dateCalendarType": 0
+            },
+            "costs": {
+              "totalCost": {
+                "content": 10600,
+                "currencyCode": 0
+              },
+              "insuranceContribution": {
+                "content": 7000,
+                "currencyCode": 0
+              },
+              "patientContribution": {
+                "content": 3600,
+                "currencyCode": 0
+              },
+              "differenceOfInsuranceCoverAndPrice": {
+                "content": 600,
+                "currencyCode": 0
+              },
+              "supplementaryContribution": {
+                "content": 0,
+                "currencyCode": 0
+              },
+              "payableByPatient": {
+                "content": 3600,
+                "currencyCode": 0
+              }
+            }
+          },
+          "useSubstitutionMedication": false
+        },
+        {
+          "acceptedMedicationItemInfo": {
+            "genericCode": {
+              "content": "822",
+              "schemaAgency": "Generic Code"
+            },
+            "frequencyUsage": {
+              "content": "طبق دستور پزشک",
+              "languageCode": 0
+            },
+            "medicationCount": {
+              "content": 1,
+              "unitCode": 0
+            }
+          },
+          "checkedOutMedicationItemInfo": {
+            "nationalDrugCode": {
+              "content": "9876543534",
+              "schemaAgency": "FDO.ir"
+            },
+            "frequencyUsage": {
+              "content": "طبق دستور پزشک",
+              "languageCode": 0
+            },
+            "deliveredMedicationCount": {
+              "content": 1,
+              "unitCode": 0
+            },
+            "medicationDeliverDate": {
+              "dateContent": "1397-06-10",
+              "dateCalendarType": 0
+            },
+            "costs": {
+              "totalCost": {
+                "content": 18800,
+                "currencyCode": 0
+              },
+              "insuranceContribution": {
+                "content": 10850,
+                "currencyCode": 0
+              },
+              "patientContribution": {
+                "content": 7950,
+                "currencyCode": 0
+              },
+              "differenceOfInsuranceCoverAndPrice": {
+                "content": 3300,
+                "currencyCode": 0
+              },
+              "supplementaryContribution": {
+                "content": 0,
+                "currencyCode": 0
+              },
+              "payableByPatient": {
+                "content": 7950,
+                "currencyCode": 0
+              }
+            }
+          },
+          "useSubstitutionMedication": false
+        }
+      ],
+      "combinationalMedicationsInfo": null,
+      "medicalEquipmentsInfo": null,
+      "patientInfo": {
+        "fullName": {
+          "content": "زهرا حسن زاده",
+          "languageCode": 0
+        },
+        "patientId": {
+          "content": "3620341745",
+          "schemaAgency": "NOCR.ir"
+        },
+        "birthDate": {
+          "dateContent": "1358/02/10",
+          "dateCalendarType": 0
+        },
+        "mobilePhoneNumber": null,
+        "gender": 1,
+        "hasAttendant": false,
+        "fullNameOfAttendant": {
+          "content": "",
+          "languageCode": 0
+        },
+        "attendantId": {
+          "content": "",
+          "schemaAgency": "NOCR.ir"
+        }
+      },
+      "pharmacyInfo": {
+        "pharmacyCode": {
+          "content": "15420122887",
+          "schemaAgency": "FDO.ir"
+        },
+        "technicalDirectorInfo": {
+          "tMedicalCouncilCode": {
+            "content": "6467",
+            "schemaAgency": "irimc.org"
+          },
+          "hasDeputy": false,
+          "deputy": {
+            "content": null,
+            "schemaAgency": "irimc.org"
+          }
+        },
+        "pharmacistFounderInfo": {
+          "content": "6467",
+          "schemaAgency": "irimc.org"
+        },
+        "dispenserInfo": {
+          "content": "6119900195",
+          "schemaAgency": "NOCR.ir"
+        }
+      },
+      "prescriptionDate": {
+        "dateContent": "1397-06-10",
+        "dateCalendarType": 0
+      },
+      "therapyDuration": 0
+    },
+    "payloadClass": "hix.microserver.prescription.message.DispensedPrescriptionRequest",
+    "senderId": "15420122887",
+    "plainId": "20181004115649558",
+    "encryptedId": "mTPRFTNt681XTIVt",
+    "receiverId": "14554455",
+    "service": "prescription",
+    "action": "savePrescription",
+    "version": "1.0.0",
+    "timeout": "30"
+  }
+}

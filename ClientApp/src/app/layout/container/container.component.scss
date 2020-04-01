@@ -1,0 +1,18 @@
+.container {
+  min-height: 100vh;
+}
+
+.content {
+  padding: 30px;
+}
+
+mat-drawer-container {
+  max-height: 100% !important;
+  background: transparent url('/assets/img/pattern.png') repeat;
+}
+
+@media only screen and (max-width: 480px) {
+  .content {
+    padding: 10px;
+  }
+}

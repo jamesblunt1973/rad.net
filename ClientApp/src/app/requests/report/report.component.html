@@ -1,0 +1,82 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    گزارش درخواست های رسیده
+  </b>
+  <app-counter [number]="list.length"></app-counter>
+</mat-toolbar>
+
+<div class="panel-wrapper">
+  <div class="panel-title">
+    <div class="panel-title-spacer">فیلتر و جستجو</div>
+    <ic-icon [icon]="icons.magnifyIcon"></ic-icon>
+  </div>
+
+  <div class="panel-body">
+    <form [formGroup]="filterForm" (ngSubmit)="getReport()">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="24%" fxFlex.lt-md="100%">
+          <input type="text" matInput [matAutocomplete]="auto" placeholder="نام یا کد داروخانه" formControlName="pharmacy">
+          <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="getPharmacyName">
+            <mat-option *ngFor="let pharmacy of filteredPharmacies | async" [value]="pharmacy">{{pharmacy.name}}</mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field fxFlex="24%" fxFlex.lt-md="100%">
+          <input type="text" matInput [matAutocomplete]="pAuto" placeholder="نام یا کد ملی بیمار" formControlName="patient">
+          <mat-autocomplete #pAuto="matAutocomplete" autoActiveFirstOption [displayWith]="getPatientName">
+            <mat-option *ngFor="let patient of filteredPatients | async" [value]="patient">{{patient.nationalCode + ' - ' + patient.name + ' ' + patient.surName}}</mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field fxFlex="10%" fxFlex.lt-md="45%">
+          <input type="number" matInput placeholder="کد پیگیری" formControlName="trackNo" />
+        </mat-form-field>
+        <mat-form-field fxFlex="10%" fxFlex.lt-md="45%">
+          <mat-label>نوع درخواست</mat-label>
+          <mat-select formControlName="requestType">
+            <mat-option value="1">دریافتی</mat-option>
+            <mat-option value="2">برگشتی</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="10%" fxFlex.lt-md="45%">
+          <input matInput [matDatepicker]="from"
+                 placeholder="از تاریخ"
+                 formControlName="dateFrom">
+          <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+          <mat-datepicker #from></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field fxFlex="10%" fxFlex.lt-md="45%">
+          <input matInput [matDatepicker]="to"
+                 placeholder="تا تاریخ"
+                 formControlName="dateTo">
+          <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+          <mat-datepicker #to></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxlayout="row" fxLayoutAlign="end">
+        <button type="submit" mat-raised-button color="primary">دریافت گزارش</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<table class="report" cellpadding="0" cellspacing="0" border="1">
+  <thead>
+    <tr>
+      <th>ردیف</th>
+      <th>داروخانه</th>
+      <th>تاریخ ارسال</th>
+      <th>کد رهگیری</th>
+      <th>نوع درخواست</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of list | slice:startIndex:endIndex; let i = index">
+      <td data-title="ردیف" align="center">{{startIndex + i + 1}}</td>
+      <td data-title="داروخانه">{{item.pharmacyName + ' (' + item.pharmacyCode + ')'}}</td>
+      <td data-title="از" align="center">{{item.receivedDate | momentJalaali:'jYYYY/jMM/jDD'}}</td>
+      <th data-title="کد رهگیری">{{item.trackCode}}</th>
+      <th data-title="نوع درخواست">{{item.isCanceled ? 'برگشتی' : 'درخواستی'}}</th>
+    </tr>
+  </tbody>
+</table>
+
+<app-pager [total]="list.length" [counts]="counts" (gotoPage)="changePage($event)" (changeCount)="changeCount($event)"></app-pager>

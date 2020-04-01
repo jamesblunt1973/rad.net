@@ -1,0 +1,36 @@
+<div class="panel-wrapper narrow-form">
+  <div class="panel-title">
+    <div class="panel-title-spacer">تغییر رمز ادمین</div>
+    <ic-icon [icon]="icons.keyIcon"></ic-icon>
+  </div>
+  <div class="panel-body">
+    <form #changePassFrm="ngForm">
+      <mat-form-field>
+        <input type="password" matInput placeholder="کلمه عبور فعلی" name="oldpass" [(ngModel)]="changePassModel.oldpass" required />
+      </mat-form-field>
+      <mat-form-field>
+        <input type="password" matInput placeholder="کلمه عبور جدید" name="newpass" [(ngModel)]="changePassModel.newpass" required />
+      </mat-form-field>
+      <p fxLayout="row" fxLayoutAlign="space-evenly">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!changePassFrm.valid" (click)="changePass()">ثبت</button>
+      </p>
+    </form>
+  </div>
+</div>
+<br />
+<div class="panel-wrapper narrow-form">
+  <div class="panel-title">
+    <div class="panel-title-spacer">کلید ارسال پیامک</div>
+    <ic-icon [icon]="icons.keyIcon"></ic-icon>
+  </div>
+  <div class="panel-body">
+    <form #smsKeyFrm="ngForm">
+      <mat-form-field>
+        <input type="text" matInput placeholder="رمز ارسال پیامک" name="smskey" [(ngModel)]="smsKey" required />
+      </mat-form-field>
+      <p fxLayout="row" fxLayoutAlign="space-evenly">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!smsKeyFrm.valid" (click)="updateSmsKey()">ثبت</button>
+      </p>
+    </form>
+  </div>
+</div>

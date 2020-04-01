@@ -1,0 +1,10 @@
+<mat-nav-list>
+  <mat-list-item
+                 *ngFor="let item of menuItems"
+                 [routerLink]="item.url"
+                 routerLinkActive="selected"
+                 (click)="collapseSidebar()">
+    <p matLine>{{ item.title }}</p>
+    <ic-icon [icon]="item.icon" matListIcon></ic-icon>
+  </mat-list-item>
+</mat-nav-list>

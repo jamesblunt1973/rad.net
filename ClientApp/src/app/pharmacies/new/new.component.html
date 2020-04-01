@@ -1,0 +1,33 @@
+<div class="panel-wrapper narrow-form">
+  <div class="panel-title">
+    <div class="panel-title-spacer">ثبت داروخانه جدید</div>
+    <ic-icon [icon]="icons.plusCircleIcon"></ic-icon>
+  </div>
+
+  <div class="panel-body">
+    <form class="" [formGroup]="newForm" (ngSubmit)="newPharmacy()">
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="name" placeholder="نام" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="code" placeholder="کد" required />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="tell" placeholder="تلفن ثابت" />
+        <mat-error>تلفن ثابت باید 4 تا 11 رقم باشد</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="cell" placeholder="تلفن همراه" />
+        <mat-error>تلفن همراه باید 11 رقم باشد</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <textarea matInput formControlName="address" placeholder="نشانی"></textarea>
+      </mat-form-field>
+      <p fxLayout="row" fxLayoutAlign="space-evenly">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!newForm.valid">ثبت</button>
+        <button mat-raised-button color="warn" (click)="newForm.reset()">بازنشانی فرم</button>
+        <button mat-raised-button color="accent" routerLink="/pharmacies">بازگشت به لیست</button>
+      </p>
+    </form>
+  </div>
+</div>

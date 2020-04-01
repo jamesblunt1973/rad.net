@@ -1,0 +1,74 @@
+<div fxLayout="row wrap" class="report-header">
+  <mat-card fxFlex="1 1 auto">
+    <p>داروهای ثبت شده</p>
+    <h1>{{data?.medicines || 0}}</h1>
+  </mat-card>
+  <mat-card fxFlex="1 1 auto">
+    <p>داروخانه‌های متصل</p>
+    <h1>{{data?.pharmacies || 0}}</h1>
+  </mat-card>
+  <mat-card fxFlex="1 1 auto">
+    <p>بیماران ثبت شده</p>
+    <h1>{{data?.patients || 0}}</h1>
+  </mat-card>
+  <mat-card fxFlex="1 1 auto">
+    <p>پزشکان ثبت شده</p>
+    <h1>{{data?.physicians || 0}}</h1>
+  </mat-card>
+  <mat-card fxFlex="1 1 auto">
+    <p>کل درخواست های رسیده</p>
+    <h1>{{data?.received || 0}}</h1>
+  </mat-card>
+  <mat-card fxFlex="1 1 auto">
+    <p>نسخه‌های ثبت شده</p>
+    <h1>{{data?.prescriptions || 0}}</h1>
+  </mat-card>
+  <mat-card fxFlex="1 1 auto">
+    <p>نسخه‌های تایید شده</p>
+    <h1>{{data?.verified || 0}}</h1>
+  </mat-card>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between">
+  <mat-card class="chart-container" fxFlex="30" fxFlex.lt-md="1 1 100%">
+    <ngx-charts-bar-vertical [results]="weekly"
+                             [xAxis]="true"
+                             [yAxis]="true"
+                             [legend]="false"
+                             [showXAxisLabel]="true"
+                             [showYAxisLabel]="true"
+                             [xAxisLabel]="'روز'"
+                             [yAxisLabel]="'تعداد'"
+                             (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+  </mat-card>
+  <mat-card class="chart-container" fxFlex="65" fxFlex.lt-md="1 1 100%">
+    <ngx-charts-bar-vertical [results]="monthly"
+                             [xAxis]="true"
+                             [yAxis]="true"
+                             [legend]="false"
+                             [showXAxisLabel]="true"
+                             [showYAxisLabel]="true"
+                             [xAxisLabel]="'ماه'"
+                             [yAxisLabel]="'تعداد'"
+                             (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+  </mat-card>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between" style="margin-top: 20px;">
+  <mat-card class="chart-container" fxFlex="30" fxFlex.lt-md="1 1 100%">
+    <ngx-charts-pie-chart [results]="gender"
+                          [legend]="true"
+                          (select)="onSelect($event)">
+    </ngx-charts-pie-chart>
+  </mat-card>
+  <mat-card class="chart-container" fxFlex="30" fxFlex.lt-md="1 1 100%">
+    <ngx-charts-bar-horizontal [results]="ages" [legend]="true">
+    </ngx-charts-bar-horizontal>
+  </mat-card>
+  <mat-card class="chart-container" fxFlex="30" fxFlex.lt-md="1 1 100%">
+    <ngx-charts-polar-chart [results]="polar" [legend]="true">
+    </ngx-charts-polar-chart>
+  </mat-card>
+</div>
+

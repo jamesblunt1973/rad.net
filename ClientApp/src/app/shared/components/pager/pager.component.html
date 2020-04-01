@@ -1,0 +1,11 @@
+<div class="pager" fxLayout="row" fxLayoutAlign="center" *ngIf="total > count">
+  <a class="page" *ngIf="pagesMin > 1" (click)="selectPage(1)">1</a>
+  <span *ngIf="pagesMin > 2">…</span>
+  <a class="page" *ngFor="let page of pages" [ngClass]="{'current': page === currentPage}" (click)="selectPage(page)">{{page}}</a>
+  <span *ngIf="pagesMax < pagesCount - 1">…</span>
+  <a class="page" *ngIf="pagesMax < pagesCount" (click)="selectPage(pagesCount)">{{pagesCount}}</a>
+
+  <select #ctrl *ngIf="counts.length > 1" (change)="selectCount(ctrl.value)">
+    <option *ngFor="let c of counts" [value]="c">{{c}}</option>
+  </select>
+</div>

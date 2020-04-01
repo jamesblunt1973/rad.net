@@ -1,0 +1,7 @@
+﻿/.vs
+/bin
+/obj
+/wwwroot
+/migrations
+/ClientApp/node_modules
+/.idea

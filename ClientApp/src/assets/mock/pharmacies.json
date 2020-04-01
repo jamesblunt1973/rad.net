@@ -1,0 +1,72 @@
+[
+  {
+    "PharmacyID": 1,
+    "PharmacyCode": "2548",
+    "PharmacyName": "داروخانه پاردیک",
+    "Password": "ff6f7bba7c8118bef90ac843bcecd902",
+    "Cellphone": "09379379240"
+  },
+  {
+    "PharmacyID": 2254,
+    "PharmacyCode": "2920",
+    "PharmacyName": "داروخانه هراسی",
+    "Password": "80496c42bfe29c270eff5822ad855f04",
+    "Cellphone": "09154722920"
+  },
+  {
+    "PharmacyID": 2280,
+    "PharmacyCode": "11269",
+    "PharmacyName": "داروخانه دکتر وجوهی",
+    "Password": "e1bf0649fcefe9f52fc73ecabb26d3f6",
+    "Cellphone": "۰۹۱۵۵۵۱۱۲۶۹"
+  },
+  {
+    "PharmacyID": 2281,
+    "PharmacyCode": "6535",
+    "PharmacyName": "داروخانه دکتر اسعدی",
+    "Password": "75bb1cde820f1cb19068261aece9a8fa",
+    "Cellphone": "09157006535"
+  },
+  {
+    "PharmacyID": 2282,
+    "PharmacyCode": "12679",
+    "PharmacyName": "داروخانه دکتر طالبی",
+    "Password": "2e169a15df27e44612f7e995e9b90c10",
+    "Cellphone": "09155512679"
+  },
+  {
+    "PharmacyID": 2285,
+    "PharmacyCode": "41397",
+    "PharmacyName": "داروخانه دکتر دانیال باقری ",
+    "Password": "1efc61fc8721f419ad8771bdc8eee27e",
+    "Cellphone": "09151541397"
+  },
+  {
+    "PharmacyID": 2286,
+    "PharmacyCode": "54511",
+    "PharmacyName": "داروخانه تعاونی عطار فیروزه",
+    "Password": "0b3e12af28abf265541c1f64b41a1c87",
+    "Cellphone": "09154254511"
+  },
+  {
+    "PharmacyID": 2287,
+    "PharmacyCode": "35372",
+    "PharmacyName": "داروخانه دکتر شورورزی",
+    "Password": "eb84f7a71c07909fbffcb5be4d6d8225",
+    "Cellphone": "09151535372"
+  },
+  {
+    "PharmacyID": 2291,
+    "PharmacyCode": "32631",
+    "PharmacyName": "د.مهیاری",
+    "Password": "790b9737f8a68e1ed6dc92fa90b4de1a",
+    "Cellphone": "09157632631"
+  },
+  {
+    "PharmacyID": 2292,
+    "PharmacyCode": "16709",
+    "PharmacyName": "د.چوپانکاره",
+    "Password": "004148548a01924394c5c84bdb879522",
+    "Cellphone": "09157016709"
+  }
+]

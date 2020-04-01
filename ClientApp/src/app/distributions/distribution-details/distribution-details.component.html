@@ -1,0 +1,31 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    گزارش تفصیلی توزیع دارو
+  </b>
+  <app-counter [number]="list.length"></app-counter>
+</mat-toolbar>
+
+<div class="report-container">
+  <table class="report" cellpadding="0" cellspacing="0" border="1">
+    <thead>
+      <tr>
+        <th>ردیف</th>
+        <th>تاریخ</th>
+        <th>توزیع</th>
+        <th>تحویل</th>
+        <th>شماره نسخه</th>
+        <th>بالانس</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list; let i = index">
+        <td align="center" data-title="ردیف">{{i + 1}}</td>
+        <td data-title="تاریخ">{{item | momentJalaali:'jYYYY/jMM/jDD'}}</td>
+        <td align="center" data-title="توزیع">{{item.amount > 0 ? item.amount : '-----'}}</td>
+        <td align="center" data-title="تحویل">{{item.amount < 0 ? (item.amount * -1) : '-----'}}</td>
+        <td align="center" data-title="شماره نسخه">{{item.prescriptionId ? item.prescriptionId : '-----'}}</td>
+        <td align="center" data-title="بالانس">{{item.stock}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

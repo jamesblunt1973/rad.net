@@ -1,0 +1,260 @@
+/*
+  @import '@angular/material/prebuilt-themes/indigo-pink.css';
+  @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+  @import '@angular/material/prebuilt-themes/purple-green.css';
+  @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+*/
+
+@import 'assets/scss/theme.scss';
+
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: normal;
+  src: url("assets/iransans/eot/IRANSansWeb(FaNum).eot");
+  src: url("assets/iransans/eot/IRANSansWeb(FaNum).eot?#iefix") format("embedded-opentype"),
+  /* IE6-8 */ url("assets/iransans/woff2/IRANSansWeb(FaNum).woff2") format("woff2"),
+  /* FF39+,Chrome36+, Opera24+*/ url("assets/iransans/woff/IRANSansWeb(FaNum).woff") format("woff"),
+  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url("assets/iransans/ttf/IRANSansWeb(FaNum).ttf") format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: IRANSans !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  direction: rtl;
+  color: $gray-text-color !important;
+}
+
+.panel-wrapper {
+  border: 1px solid $gray-border-color;
+  box-shadow: 0 2px 2px $shadow-from, 0 0 2px $shadow-to;
+  margin: 4px;
+  background-color: #fff;
+
+  .panel-title {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 8px 20px;
+    color: $gray-text-color;
+    background: $gray-bg-color;
+
+    ic-icon {
+      font-size: 1.4rem;
+      line-height: 0.8rem;
+    }
+  }
+
+  .panel-title-spacer {
+    flex: 1 1 auto;
+  }
+
+  .panel-body {
+    padding: 30px;
+  }
+}
+
+table.report {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  background-color: #fff;
+
+  th {
+    padding: 2px 5px;
+    background-color: $gray-bg-color;
+    color: $gray-text-color;
+    border: 1px solid $gray-border-color;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  td {
+    padding: 7px;
+    border: 1px solid $gray-border-color;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.max-width {
+  max-width: 100%;
+}
+
+.btn {
+  cursor: pointer;
+  border-radius: 50%;
+
+  &.btn-primary {
+    color: $primary;
+  }
+
+  &.btn-warn {
+    color: $warn;
+  }
+
+  &.btn-accent {
+    color: $accent;
+  }
+
+  &.bottom-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    font-size: 3rem;
+
+    .mat-button-ripple {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  &.btn-large {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.btn-small {
+    width: 16px;
+    height: 18px;
+  }
+}
+
+.customSnackBar {
+  background-color: $primary;
+}
+
+.customErrorSnackBar {
+  background-color: $warn;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background: $lightGrayBack;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $lightGray;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $veryLightGray;
+}
+
+.narrow-form {
+  width: 480px;
+  max-width: 100%;
+  margin: auto;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.column-form {
+  max-width: 360px;
+}
+
+.report-container {
+  max-height: calc(100vh - 130px);
+  overflow: auto;
+}
+
+@media only screen and (max-width: 1024px) {
+  table.report {
+    width: 100%;
+    margin: auto;
+    border: none !important;
+  }
+
+  table.report,
+  table.report thead,
+  table.report tbody,
+  table.report th,
+  table.report td,
+  table.report tr {
+    display: block;
+  }
+
+  table.report thead tr {
+    display: none;
+  }
+
+  table.report tr {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  table.report td {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    border: 0;
+    border-bottom: 1px solid #dee2e6;
+    position: relative;
+    padding-right: 25% !important;
+    padding-left: 5px;
+    text-align: right;
+    min-height: 35px;
+  }
+
+  table.report td:before {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 20%;
+    padding-right: 10px;
+    content: attr(data-title);
+    background-color: transparent !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+  }
+}
+
+@media only screen and (max-width: 1050px) and (min-width: 768px) {
+  .small-input {
+    width: 115px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .small-input {
+    width: 60px;
+  }
+  .panel-body {
+    padding: 10px;
+  }
+}

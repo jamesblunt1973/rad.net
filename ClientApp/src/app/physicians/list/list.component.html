@@ -1,0 +1,115 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    لیست پزشکان
+  </b>
+  <app-counter [number]="physicians.length"></app-counter>
+</mat-toolbar>
+
+<div class="panel-wrapper">
+  <div class="panel-title">
+    <div class="panel-title-spacer">فیلتر و جستجو</div>
+    <ic-icon [icon]="icons.magnifyIcon"></ic-icon>
+  </div>
+
+  <div class="panel-body">
+    <form #filterForm="ngForm">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="30%" fxFlex.lt-md="100%">
+          <input type="text"
+                 matInput
+                 name="str"
+                 [(ngModel)]="filterModel.str"
+                 placeholder="نام یا نام خانوادگی"
+                 (keyup)="applyFilter()"
+                 (keyup.esc)="filterModel.str.value = ''" />
+        </mat-form-field>
+        <mat-form-field fxFlex="30%" fxFlex.lt-md="100%">
+          <input type="text"
+                 matInput
+                 name="code"
+                 [(ngModel)]="filterModel.code"
+                 placeholder="کد نظام پزشکی"
+                 (keyup)="applyFilter()"
+                 (keyup.esc)="filterModel.code.value = ''" />
+        </mat-form-field>
+        <mat-form-field fxFlex="30%" fxFlex.lt-md="100%">
+          <mat-label>تخصص</mat-label>
+          <mat-select (selectionChange)="applyFilter()" name="specialityId" [(ngModel)]="filterModel.specialityId">
+            <mat-option *ngFor="let speciality of originalSpecialities" [value]="speciality.id">{{speciality.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxlayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="warn" [disabled]="physicians.length == originalPhysicians.length" (click)="physicians = originalPhysicians; filterForm.reset()">حذف فیلتر</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<table class="report" cellpadding="0" cellspacing="0" border="1">
+  <thead>
+    <tr>
+      <th>ردیف</th>
+      <th>نام پزشک</th>
+      <th>نظام پزشکی</th>
+      <th>تخصص</th>
+      <th>عملیات</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let physician of physicians | slice:startIndex:endIndex; let i = index">
+      <td *ngIf="physician.edit" colspan="8" class="forms">
+        <div class="panel-wrapper">
+          <div class="panel-title">
+            <div class="panel-title-spacer">ویرایش پزشک</div>
+            <ic-icon [icon]="icons.editIcon"></ic-icon>
+          </div>
+
+          <div class="panel-body">
+            <div class="narrow-form">
+              <mat-form-field class="full-width">
+                <input type="text" matInput [(ngModel)]="physician.name" placeholder="نام" />
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input type="text" matInput [(ngModel)]="physician.code" required placeholder="نظام پزشکی" />
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <mat-select [(ngModel)]="physician.specialityId">
+                  <mat-option *ngFor="let speciality of originalSpecialities" [value]="speciality.id">{{speciality.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <p fxLayout="row" fxLayoutAlign="space-evenly" class="actions">
+                <ic-icon [icon]="icons.checkIcon" class="btn btn-primary btn-large" (click)="updateItem(physician)" matRipple></ic-icon>
+                <ic-icon [icon]="icons.closeIcon" class="btn btn-warn btn-large" (click)="physician.edit = false" matRipple></ic-icon>
+              </p>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td *ngIf="!physician.edit" align="center" data-title="ردیف">{{startIndex + i + 1}}</td>
+      <td *ngIf="!physician.edit" data-title="نام پزشک">
+        {{physician.name}}
+      </td>
+      <td *ngIf="!physician.edit" data-title="نظام پزشکی">
+        {{physician.code}}
+      </td>
+      <td *ngIf="!physician.edit" data-title="تخصص">
+        <span *ngIf="physician.specialityId">
+          {{specialities[physician.specialityId].name}}
+        </span>
+      </td>
+      <td *ngIf="!physician.edit">
+        <p fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+          <ic-icon [icon]="icons.editIcon" class="btn btn-primary btn-small" (click)="physician.edit = true" matRipple></ic-icon>
+          <ic-icon [icon]="icons.deleteIcon" class="btn btn-warn btn-small" (click)="deleteItem(physician)" matRipple></ic-icon>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-pager [total]="physicians.length" [counts]="counts" (gotoPage)="changePage($event)" (changeCount)="changeCount($event)"></app-pager>
+
+<button class="btn bottom-btn" mat-icon-button color="accent" routerLink="/physicians/new">
+  <ic-icon [icon]="icons.plusCircleIcon"></ic-icon>
+</button>

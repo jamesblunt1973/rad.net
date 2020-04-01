@@ -1,0 +1,39 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    گزارش تفصیلی بیمار
+  </b>
+  <app-counter [number]="list.length"></app-counter>
+</mat-toolbar>
+
+<div class="report-container">
+  <table class="report" cellpadding="0" cellspacing="0" border="1">
+    <thead>
+      <tr>
+        <th>ردیف</th>
+        <th>پزشک</th>
+        <th>بیمار</th>
+        <th>کد ملی</th>
+        <th>تلفن</th>
+        <th>داروخانه</th>
+        <th>تاریخ نسخه</th>
+        <th>تاریخ تحویل</th>
+        <th>تاریخ ثبت</th>
+        <th>تعداد</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list; let i = index">
+        <td align="center" data-title="ردیف">{{i + 1}}</td>
+        <td data-title="پزشک">{{ item.physicianCode + ' - ' + item.physicianName }}</td>
+        <td data-title="بیمار">{{ item.patientName }}</td>
+        <td align="left" data-title="کد ملی">{{ item.patientNationalCode }}</td>
+        <td align="left" data-title="تلفن">{{ item.patientCell }}</td>
+        <td data-title="داروخانه">{{item.pharmacyCode + ' - ' + item.pharmacyName}}</td>
+        <td align="center" data-title="تاریخ نسخه">{{item.prescriptionDate | momentJalaali:'jYYYY/jMM/jDD'}}</td>
+        <td align="center" data-title="تاریخ تحویل">{{item.deliveryDate | momentJalaali:'jYYYY/jMM/jDD'}}</td>
+        <td align="center" data-title="تاریخ ثبت">{{item.submitDate | momentJalaali:'jYYYY/jMM/jDD'}}</td>
+        <td data-title="تعداد">{{item.amount + ' ' + item.unit}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

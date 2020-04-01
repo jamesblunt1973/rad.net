@@ -1,0 +1,43 @@
+<div class="panel-wrapper narrow-form">
+  <div class="panel-title">
+    <div class="panel-title-spacer">ثبت بیمار جدید</div>
+    <ic-icon [icon]="icons.plusCircleIcon"></ic-icon>
+  </div>
+
+  <div class="panel-body">
+    <form class="" [formGroup]="newForm" (ngSubmit)="newPatient()">
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="name" placeholder="نام و نام خانوادگی" />
+      </mat-form-field>
+      <mat-radio-group aria-label="Select Gender" formControlName="gender" fxLayout="row" fxLayoutAlign="space-between">
+        <mat-radio-button [value]="true">آقا</mat-radio-button>
+        <mat-radio-button [value]="false">خانم</mat-radio-button>
+        <mat-radio-button [value]="null">نامعین</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="nationalCode" placeholder="کد ملی" required />
+        <mat-error>کد ملی الزامی است، 10 رقم</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput [matDatepicker]="bd"
+               placeholder="تاریخ تولد"
+               formControlName="birthDate">
+        <mat-datepicker-toggle matSuffix [for]="bd"></mat-datepicker-toggle>
+        <mat-datepicker #bd></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="cell" placeholder="تلفن همراه" />
+        <mat-error>تلفن همراه باید 11 رقم باشد</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="tell" placeholder="تلفن ثابت" />
+        <mat-error>تلفن ثابت باید 4 تا 11 رقم باشد</mat-error>
+      </mat-form-field>
+      <p fxLayout="row" fxLayoutAlign="space-evenly">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!newForm.valid">ثبت</button>
+        <button mat-raised-button color="warn" (click)="newForm.reset()">بازنشانی فرم</button>
+        <button mat-raised-button color="accent" routerLink="/patients">بازگشت به لیست</button>
+      </p>
+    </form>
+  </div>
+</div>

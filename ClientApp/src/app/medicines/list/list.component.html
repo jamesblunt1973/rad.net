@@ -1,0 +1,180 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    لیست داروها
+  </b>
+  <app-counter [number]="medicines.length"></app-counter>
+</mat-toolbar>
+
+<div class="panel-wrapper">
+  <div class="panel-title">
+    <div class="panel-title-spacer">فیلتر و جستجو</div>
+    <ic-icon [icon]="icons.magnifyIcon"></ic-icon>
+  </div>
+
+  <div class="panel-body">
+    <form #filterForm="ngForm">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="45%" fxFlex.lt-md="100%">
+          <input #str
+                 type="text"
+                 matInput
+                 name="str"
+                 [(ngModel)]="filterModel.str"
+                 placeholder="نام یا برند (انگلیسی، فارسی) یا کد (جنریک، IRC)"
+                 (keyup)="applyFilter()"
+                 (keyup.esc)="str.value = ''"
+                 [ngClass]="checkLTR(str.value.charCodeAt(0))" /><!--(keyup.enter)="filterText(str.value)"-->
+        </mat-form-field>
+        <mat-form-field fxFlex="45%" fxFlex.lt-md="100%">
+          <mat-label>نام شرکت (تولید یا توزیع کننده)</mat-label>
+          <mat-select (selectionChange)="applyFilter()" name="company" [(ngModel)]="filterModel.company">
+            <mat-option *ngFor="let company of originalCompanies" [value]="company.id">{{company.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxlayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="warn" [disabled]="medicines.length == originalMedicines.length" (click)="medicines = originalMedicines; filterForm.reset()">حذف فیلتر</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<table class="report" cellpadding="0" cellspacing="0" border="1">
+  <thead>
+    <tr>
+      <th>ردیف</th>
+      <th>کد جنریک</th>
+      <th>کد IRC</th>
+      <th>نام دارو</th>
+      <th>برند</th>
+      <th>شرکت</th>
+      <th>دوز</th>
+      <th>نوع مصرف</th>
+      <th>واحد</th>
+      <th>دوره (روز)</th>
+      <th>تعداد مجاز</th>
+      <th>عملیات</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let medicine of medicines | slice:startIndex:endIndex; let i = index">
+      <td *ngIf="medicine.edit" colspan="13" class="forms">
+        <div class="panel-wrapper">
+          <div class="panel-title">
+            <div class="panel-title-spacer">ویرایش دارو</div>
+            <ic-icon [icon]="icons.editIcon"></ic-icon>
+          </div>
+
+          <div class="panel-body">
+            <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap.gt-xs="20px">
+              <div class="column-form">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.genericCode" placeholder="کد جنریک" />
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.ircCode" placeholder="کد IRC" />
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.faName" placeholder="نام فارسی" />
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.enName" placeholder="En Name" />
+                </mat-form-field>
+              </div>
+              <div class="column-form">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.brandFaName" placeholder="برند فارسی" />
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.brandEnName" placeholder="En Brand" />
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <mat-label>نام شرکت تولید کننده</mat-label>
+                  <mat-select [(ngModel)]="medicine.producerId">
+                    <mat-option *ngFor="let company of originalCompanies" [value]="company.id">{{company.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <mat-label>نام شرکت توزیع کننده</mat-label>
+                  <mat-select [(ngModel)]="medicine.distributorId">
+                    <mat-option *ngFor="let company of originalCompanies" [value]="company.id">{{company.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.unit" placeholder="واحد شمارش" />
+                </mat-form-field>
+              </div>
+              <div class="column-form">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.dosage" placeholder="دوز" />
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <mat-label>نوع مصرف</mat-label>
+                  <mat-select [(ngModel)]="medicine.usageType">
+                    <mat-option *ngFor="let ut of usageTypeNames; let i = index" [value]="i">{{ut}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.usagePeriod" required placeholder="بازه تاریخی (روز)" />
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="medicine.maximumUsageAmount" required placeholder="تعداد مجاز بازه" />
+                </mat-form-field>
+                <p fxLayout="row" fxLayoutAlign="space-evenly" class="actions">
+                  <ic-icon [icon]="icons.checkIcon" class="btn btn-primary btn-large" (click)="updateItem(medicine)" matRipple></ic-icon>
+                  <ic-icon [icon]="icons.closeIcon" class="btn btn-warn btn-large" (click)="medicine.edit = false" matRipple></ic-icon>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td *ngIf="!medicine.edit" align="center" data-title="ردیف">{{startIndex + i + 1}}</td>
+      <td *ngIf="!medicine.edit" align="left" data-title="کد جنریک">
+        <span>{{medicine.genericCode}}</span>
+      </td>
+      <td *ngIf="!medicine.edit" align="left" data-title="کد IRC">
+        <p *ngIf="medicine.ircCode">IRC: {{medicine.ircCode}}</p>
+      </td>
+      <td *ngIf="!medicine.edit" data-title="نام دارو">
+        <p *ngIf="medicine.faName" class="border">{{medicine.faName}}</p>
+        <p *ngIf="medicine.enName" class="latin-text">{{medicine.enName}}</p>
+      </td>
+      <td *ngIf="!medicine.edit" data-title="برند">
+        <p *ngIf="medicine.brandFaName" class="border">{{medicine.brandFaName}}</p>
+        <p *ngIf="medicine.brandEnName" class="latin-text">{{medicine.brandEnName}}</p>
+      </td>
+      <td *ngIf="!medicine.edit" data-title="شرکت">
+        <p *ngIf="medicine.producerId" class="border">تولید: {{companies[medicine.producerId]?.name}}</p>
+        <p *ngIf="medicine.distributorId">توزیع: {{companies[medicine.distributorId]?.name}}</p>
+      </td>
+      <td *ngIf="!medicine.edit" data-title="دوز">
+        <p *ngIf="medicine.dosage">{{medicine.dosage}}</p>
+      </td>
+      <td *ngIf="!medicine.edit" data-title="نوع مصرف">
+        <p *ngIf="medicine.usageType != null">{{usageTypeNames[medicine.usageType]}}</p>
+      </td>
+      <td *ngIf="!medicine.edit" data-title="واحد">
+        <p *ngIf="medicine.unit">{{medicine.unit}}</p>
+      </td>
+      <td *ngIf="!medicine.edit" align="center" data-title="دوره (روز)">
+        <span>{{medicine.usagePeriod}}</span>
+      </td>
+      <td *ngIf="!medicine.edit" align="center" data-title="تعداد مجاز">
+        <span>{{medicine.maximumUsageAmount}}</span>
+      </td>
+      <td *ngIf="!medicine.edit">
+        <p fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+          <ic-icon [icon]="icons.editIcon" class="btn btn-primary btn-small" (click)="medicine.edit = true" matRipple></ic-icon>
+          <ic-icon [icon]="icons.deleteIcon" class="btn btn-warn btn-small" (click)="deleteItem(medicine)" matRipple></ic-icon>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-pager [total]="medicines.length" [counts]="counts" (gotoPage)="changePage($event)" (changeCount)="changeCount($event)"></app-pager>
+
+<button class="btn bottom-btn" mat-icon-button color="accent" routerLink="/medicines/new">
+  <ic-icon [icon]="icons.plusCircleIcon"></ic-icon>
+</button>

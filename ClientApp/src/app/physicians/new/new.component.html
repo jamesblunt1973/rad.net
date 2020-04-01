@@ -1,0 +1,28 @@
+<div class="panel-wrapper narrow-form">
+  <div class="panel-title">
+    <div class="panel-title-spacer">ثبت پزشک جدید</div>
+    <ic-icon [icon]="icons.plusCircleIcon"></ic-icon>
+  </div>
+
+  <div class="panel-body">
+    <form class="" [formGroup]="newForm" (ngSubmit)="newPhysician()">
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="name" placeholder="نام" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="code" required placeholder="نظام پزشکی" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>تخصص</mat-label>
+        <mat-select formControlName="specialityId">
+          <mat-option *ngFor="let speciality of specialities" [value]="speciality.id">{{speciality.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p fxLayout="row" fxLayoutAlign="space-evenly">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!newForm.valid">ثبت</button>
+        <button mat-raised-button color="warn" (click)="newForm.reset()">بازنشانی فرم</button>
+        <button mat-raised-button color="accent" routerLink="/physicians">بازگشت به لیست</button>
+      </p>
+    </form>
+  </div>
+</div>

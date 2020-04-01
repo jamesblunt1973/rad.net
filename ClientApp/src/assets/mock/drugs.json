@@ -1,0 +1,95 @@
+﻿[
+  {
+    "DrugID": 119,
+    "GenericCode": "01328",
+    "IRC": "1111",
+    "DrugName": "METHYLPHENIDATE HCL 10MG TAB - RITALIN",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 120,
+    "GenericCode": "07991",
+    "IRC": "1459",
+    "DrugName": "METHYLPHENIDATE HCL 20MG SR TAB TABLET - RITALIN",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 121,
+    "GenericCode": "12544",
+    "DrugName": "ANTIHEMOPHILIC FACTOR VIII (RECOMBINANT) 500U VIAL INJECTION",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 122,
+    "GenericCode": "13238",
+    "DrugName": "ANTIHEMOPHILIC FACTOR VIII (RECOMBINANT) 250U VIAL INJECTION",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 123,
+    "GenericCode": "05728",
+    "DrugName": "ANTIHEMOPHILIC FACTOR VIII(RECOMBINANT) 1000U VIAL INJECTION",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 124,
+    "GenericCode": "01309",
+    "DrugName": "WARFARIN SODIUM 5MG TAB 5MG TABLET",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 125,
+    "GenericCode": "01284",
+    "DrugName": "VINCRISTINE SULFATE 1MG VIAL 1MG INJECTION",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 126,
+    "GenericCode": "02194",
+    "DrugName": "VINCRISTINE SULFATE 1MG/ML AMP 1MG/ML INJECTION",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 127,
+    "GenericCode": "05423",
+    "DrugName": "VALSARTAN 80MG TAB TABLET",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 128,
+    "GenericCode": "01911",
+    "DrugName": "ATORVASTATIN 20MG TAB",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 129,
+    "GenericCode": "02043",
+    "DrugName": "ENOXAPARIN 100MG/ML (4,000 U) 0.4ML SYRINGE INJECTION",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 130,
+    "GenericCode": "07581",
+    "DrugName": "SODIUM BENZOATE",
+    "AllowedDays": 30,
+    "AllowedAmount": 300
+  },
+  {
+    "DrugID": 136,
+    "GenericCode": "00077",
+    "DrugName": "amoxicillin 500",
+    "AllowedDays": 30,
+    "AllowedAmount": 240
+  }
+]

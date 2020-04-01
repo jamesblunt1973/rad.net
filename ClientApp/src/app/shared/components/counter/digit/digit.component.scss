@@ -1,0 +1,44 @@
+.digit-container {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  color: rgba(0,0,0,.54);
+  margin: 0 2px;
+  overflow: hidden;
+  font-size: 1em;
+  border-radius: 4px;
+  position: relative;
+  border: 1px solid rgba(0,0,0,.03);
+  transition: all 300ms ease-in-out 100ms;
+}
+
+.num-container {
+  position: absolute;
+  width: 100%;
+  width: 32px;
+  height: 32px;
+  transition: all 300ms ease-in-out 100ms;
+}
+
+.num {
+  top: 0;
+  line-height: 32px;
+  text-align: center;
+  background: #fff;
+  transition: all 300ms ease-in-out 100ms;
+}
+
+.beginCounter {
+  top: 5px;
+  opacity: 1;
+}
+
+.reset {
+  opacity: 0;
+}
+
+@for $i from 0 through 9 {
+  .num#{$i} {
+    transition-delay: $i*200ms;
+  }
+}

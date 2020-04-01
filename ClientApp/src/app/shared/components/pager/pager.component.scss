@@ -1,0 +1,28 @@
+@import '../../../../assets/scss/theme.scss';
+
+.pager {
+  margin-top: 20px;
+  user-select: none;
+}
+
+.page {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $primaryLight;
+  }
+
+  &.current {
+    background: $primary;
+    color: #fff;
+    cursor: default;
+  }
+}

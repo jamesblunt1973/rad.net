@@ -1,0 +1,21 @@
+.report {
+  margin: 12px 4px 0 4px;
+  max-width: calc(100% - 8px);
+}
+
+.border {
+  border-bottom: 1px dotted #ccc;
+}
+
+.forms {
+  padding-right: 5px !important;
+
+  .panel-wrapper {
+    margin: 30px auto;
+    max-width: 1180px;
+  }
+}
+
+.actions {
+  font-size: 2rem;
+}

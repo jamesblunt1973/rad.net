@@ -1,0 +1,143 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    لیست بیماران
+  </b>
+  <app-counter [number]="patients.length"></app-counter>
+</mat-toolbar>
+
+<div class="panel-wrapper">
+  <div class="panel-title">
+    <div class="panel-title-spacer">فیلتر و جستجو</div>
+    <ic-icon [icon]="icons.magnifyIcon"></ic-icon>
+  </div>
+
+  <div class="panel-body">
+    <form #filterForm="ngForm">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="30%" fxFlex.lt-md="100%">
+          <input type="text"
+                 matInput
+                 name="str"
+                 [(ngModel)]="filterModel.str"
+                 placeholder="نام یا نام خانوادگی"
+                 (keyup)="applyFilter()"
+                 (keyup.esc)="filterModel.str.value = ''" />
+        </mat-form-field>
+        <mat-form-field fxFlex="30%" fxFlex.lt-md="100%">
+          <input type="text"
+                 matInput
+                 name="nationalCode"
+                 [(ngModel)]="filterModel.nationalCode"
+                 placeholder="کد ملی"
+                 (keyup)="applyFilter()"
+                 (keyup.esc)="filterModel.nationalCode.value = ''" />
+        </mat-form-field>
+        <mat-form-field fxFlex="30%" fxFlex.lt-md="100%">
+          <input type="text"
+                 matInput
+                 name="cell"
+                 [(ngModel)]="filterModel.cell"
+                 placeholder="شماره همراه"
+                 (keyup)="applyFilter()"
+                 (keyup.esc)="filterModel.cell.value = ''" />
+        </mat-form-field>
+      </div>
+      <div fxlayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="warn" [disabled]="patients.length == originalPatients.length" (click)="patients = originalPatients; filterForm.reset()">حذف فیلتر</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<table class="report" cellpadding="0" cellspacing="0" border="1">
+  <thead>
+    <tr>
+      <th>ردیف</th>
+      <th>نام و نام خانوادگی</th>
+      <th>تاریخ تولد</th>
+      <th>کد ملی</th>
+      <th>موبایل</th>
+      <th>تلفن</th>
+      <th>عملیات</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let patient of patients | slice:startIndex:endIndex; let i = index">
+      <td *ngIf="patient.edit" colspan="8" class="forms">
+        <div class="panel-wrapper">
+          <div class="panel-title">
+            <div class="panel-title-spacer">ویرایش بیمار</div>
+            <ic-icon [icon]="icons.editIcon"></ic-icon>
+          </div>
+
+          <div class="panel-body">
+            <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap.gt-xs="20px">
+              <div class="column-form">
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="patient.name" placeholder="نام" />
+                </mat-form-field>
+                <mat-radio-group aria-label="Select Gender" [(ngModel)]="patient.gender" fxLayout="row" fxLayoutAlign="space-between">
+                  <mat-radio-button [value]="true">آقا</mat-radio-button>
+                  <mat-radio-button [value]="false">خانم</mat-radio-button>
+                  <mat-radio-button [value]="null">نامعین</mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="patient.nationalCode" required pattern="^[0-9]{10}$" placeholder="کد ملی" />
+                  <mat-error>کد ملی الزامی است، 10 رقم</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="column-form">
+                <mat-form-field class="full-width">
+                  <input matInput [matDatepicker]="bd"
+                         placeholder="تاریخ تولد"
+                         [(ngModel)]="patient.birthDate">
+                  <mat-datepicker-toggle matSuffix [for]="bd"></mat-datepicker-toggle>
+                  <mat-datepicker #bd></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="patient.cell" placeholder="تلفن همراه" />
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text" matInput [(ngModel)]="patient.tell" placeholder="تلفن ثابت" />
+                </mat-form-field>
+                <p fxLayout="row" fxLayoutAlign="space-evenly" class="actions">
+                  <ic-icon [icon]="icons.checkIcon" class="btn btn-primary btn-large" (click)="updateItem(patient)" matRipple></ic-icon>
+                  <ic-icon [icon]="icons.closeIcon" class="btn btn-warn btn-large" (click)="patient.edit = false" matRipple></ic-icon>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td *ngIf="!patient.edit" align="center" data-title="ردیف">{{startIndex + i + 1}}</td>
+      <td *ngIf="!patient.edit" data-title="نام و نام خانوادگی">
+        {{patient.gender != null ? (patient.gender ? 'آقای ': 'خانم ') : '' }}
+        {{patient.name}}
+      </td>
+      <td *ngIf="!patient.edit" align="center" data-title="تاریخ تولد">
+        {{patient.birthDate | momentJalaali:'jYYYY/jMM/jDD'}}
+      </td>
+      <td *ngIf="!patient.edit" align="left" data-title="کد ملی">
+        {{patient.nationalCode}}
+      </td>
+      <td *ngIf="!patient.edit" align="left" data-title="موبایل">
+        {{patient.cell}}
+      </td>
+      <td *ngIf="!patient.edit" align="left" data-title="تلفن">
+        {{patient.tell}}
+      </td>
+      <td *ngIf="!patient.edit">
+        <p fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+          <ic-icon [icon]="icons.editIcon" class="btn btn-primary btn-small" (click)="patient.edit = true" matRipple></ic-icon>
+          <ic-icon [icon]="icons.deleteIcon" class="btn btn-warn btn-small" (click)="deleteItem(patient)" matRipple></ic-icon>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-pager [total]="patients.length" [counts]="counts" (gotoPage)="changePage($event)" (changeCount)="changeCount($event)"></app-pager>
+
+<button class="btn bottom-btn" mat-icon-button color="accent" routerLink="/patients/new">
+  <ic-icon [icon]="icons.plusCircleIcon"></ic-icon>
+</button>

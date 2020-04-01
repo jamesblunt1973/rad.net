@@ -1,0 +1,23 @@
+<div fxLayout="row" fxlayoutAlign="center center" class="container">
+  <div class="panel-wrapper narrow-form">
+    <div class="panel-title">
+      <div class="panel-title-spacer">ورود به سامانه</div>
+      <ic-icon [icon]="icons.keyIcon"></ic-icon>
+    </div>
+
+    <div class="panel-body">
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <mat-form-field>
+          <input type="text" matInput placeholder="نام کاربری" required name="username" [(ngModel)]="model.username" />
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput placeholder="کلمه عبور" required name="password" [(ngModel)]="model.password" />
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid" *ngIf="!loading">ورود به سامانه</button>
+          <mat-spinner diameter="25" *ngIf="loading"></mat-spinner>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

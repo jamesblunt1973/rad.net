@@ -1,0 +1,45 @@
+<div class="panel-wrapper narrow-form">
+  <div class="panel-title">
+    <div class="panel-title-spacer">ثبت توزیع دارو</div>
+    <ic-icon [icon]="icons.plusCircleIcon"></ic-icon>
+  </div>
+
+  <div class="panel-body">
+    <form class="" [formGroup]="newForm" (ngSubmit)="newDistribution()">
+      <mat-form-field class="full-width">
+        <mat-label>نام شرکت توزیع کننده</mat-label>
+        <mat-select formControlName="companyId">
+          <mat-option *ngFor="let company of companies" [value]="company.id">{{company.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput [matAutocomplete]="mAuto" placeholder="کد، برند یا نام دارو" formControlName="medicine">
+        <mat-autocomplete #mAuto="matAutocomplete" autoActiveFirstOption [displayWith]="getMedicineTitle" (optionSelected)="medicineSelect($event)">
+          <mat-option *ngFor="let medicine of filteredMedicines | async" [value]="medicine">{{medicine.genericCode + (medicine.faName ? ', ' + medicine.faName : '')}}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput [matAutocomplete]="auto" placeholder="نام یا کد داروخانه" formControlName="pharmacy">
+        <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="getPharmacyName">
+          <mat-option *ngFor="let pharmacy of filteredPharmacies | async" [value]="pharmacy">{{pharmacy.name}}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput formControlName="amount" placeholder="تعداد / مقدار" />
+        <span matSuffix>{{unit}}</span>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="bd"
+               placeholder="تاریخ تحویل"
+               formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="bd"></mat-datepicker-toggle>
+        <mat-datepicker #bd></mat-datepicker>
+      </mat-form-field>
+      <p fxLayout="row" fxLayoutAlign="space-evenly">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!newForm.valid">ثبت</button>
+        <button mat-raised-button color="warn" (click)="newForm.reset()">بازنشانی فرم</button>
+        <button mat-raised-button color="accent" routerLink="/distributions">بازگشت به لیست</button>
+      </p>
+    </form>
+  </div>
+</div>

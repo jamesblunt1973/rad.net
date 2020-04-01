@@ -1,0 +1,67 @@
+<div class="panel-wrapper narrow-form">
+  <div class="panel-title">
+    <div class="panel-title-spacer">ثبت داروی جدید</div>
+    <ic-icon [icon]="icons.plusCircleIcon"></ic-icon>
+  </div>
+
+  <div class="panel-body">
+    <form class="" [formGroup]="newForm" (ngSubmit)="newMedicine()">
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="genericCode" placeholder="کد جنریک" />
+        <mat-error>حداکثر 5 رقم</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="ircCode" placeholder="کد IRC" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="faName" placeholder="نام فارسی" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="enName" placeholder="En Name" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="brandFaName" placeholder="برند فارسی" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="brandEnName" placeholder="En Brand" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>نام شرکت تولید کننده</mat-label>
+        <input type="text" matInput [matAutocomplete]="companiesAuto" formControlName="producer">
+        <mat-autocomplete #companiesAuto="matAutocomplete" autoActiveFirstOption [displayWith]="getCompanyTitle">
+          <mat-option *ngFor="let company of filteredProducers | async" [value]="company">{{company.name}}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>نام شرکت توزیع کننده</mat-label>
+        <input type="text" matInput [matAutocomplete]="distsAuto" formControlName="distributor">
+        <mat-autocomplete #distsAuto="matAutocomplete" autoActiveFirstOption [displayWith]="getCompanyTitle">
+          <mat-option *ngFor="let company of filteredDistributors | async" [value]="company">{{company.name}}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="unit" placeholder="واحد شمارش" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="dosage" placeholder="دوز" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>نوع مصرف</mat-label>
+        <mat-select formControlName="usageType">
+          <mat-option *ngFor="let ut of usageTypeNames; let i = index" [value]="i">{{ut}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="usagePeriod" placeholder="بازه تاریخی (روز)" required />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="text" matInput formControlName="maximumUsageAmount" placeholder="تعداد مجاز بازه" required />
+      </mat-form-field>
+      <p fxLayout="row" fxLayoutAlign="space-evenly">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!newForm.valid">ثبت</button>
+        <button type="reset" mat-raised-button color="warn">بازنشانی فرم</button>
+        <button mat-raised-button color="accent" routerLink="/medicines">بازگشت به لیست</button>
+      </p>
+    </form>
+  </div>
+</div>
